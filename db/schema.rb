@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_19_202712) do
+ActiveRecord::Schema.define(version: 2020_07_22_175717) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,18 @@ ActiveRecord::Schema.define(version: 2020_07_19_202712) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["away_team_id"], name: "index_battles_on_away_team_id"
     t.index ["home_team_id"], name: "index_battles_on_home_team_id"
+  end
+
+  create_table "matches", force: :cascade do |t|
+    t.bigint "home_member_id"
+    t.bigint "away_member_id"
+    t.string "winner", default: ""
+    t.string "loser", default: ""
+    t.string "status", default: "playing"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["away_member_id"], name: "index_matches_on_away_member_id"
+    t.index ["home_member_id"], name: "index_matches_on_home_member_id"
   end
 
   create_table "memberships", force: :cascade do |t|
@@ -64,6 +76,8 @@ ActiveRecord::Schema.define(version: 2020_07_19_202712) do
 
   add_foreign_key "battles", "teams", column: "away_team_id"
   add_foreign_key "battles", "teams", column: "home_team_id"
+  add_foreign_key "matches", "users", column: "away_member_id"
+  add_foreign_key "matches", "users", column: "home_member_id"
   add_foreign_key "memberships", "teams"
   add_foreign_key "memberships", "users"
   add_foreign_key "rosters", "teams"
