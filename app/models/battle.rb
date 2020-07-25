@@ -1,9 +1,4 @@
 class Battle < ApplicationRecord
-  def home_team
-    Team.find(home_team_id)
-  end
-
-  def away_team
-    Team.find(away_team_id)
-  end
+  belongs_to :home_team, class_name: "Team"
+  belongs_to :away_team, class_name: "Team"
 end

@@ -1,11 +1,18 @@
-ben = User.create(email: "ben@gmail.com",password: "123456")
-alex = User.create(email: "alex@gmail.com",password: "123456")
-celie = User.create(email: "celie@gmail.com",password: "123456")
-becca = User.create(email: "becca@gmail.com",password: "123456")
+ben = User.create(email: "ben@gmail.com", password: "123456")
+alex = User.create(email: "alex@gmail.com", password: "123456")
+alex_team = Team.create(user: alex, name: "Alex Team")
+ben_team = Team.create(user: ben, name: "Ben Team")
 
-alex_team = Team.create(user: alex)
-ben_team = Team.create(user: ben)
-membership = Membership.create(user: celie, team: alex_team)
-membership = Membership.create(user: becca, team: ben_team)
+puts 'creating Alex Team members'
+10.times {
+  user = User.create(email: Faker::Internet.email, username: Faker::Internet.username, password: "123456", rating: (500..2500).to_a.sample * 10)
+  Membership.create(user: user, team: alex_team)
+}
+
+puts 'creating Ben Team members'
+10.times {
+  user = User.create(email: Faker::Internet.email, username: Faker::Internet.username, password: "123456", rating: (500..2500 ).to_a.sample * 10)
+  Membership.create(user: user, team: ben_team)
+}
 
 battle = Battle.create(home_team: alex_team, away_team: ben_team)
