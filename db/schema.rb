@@ -28,12 +28,14 @@ ActiveRecord::Schema.define(version: 2020_07_22_175717) do
   create_table "matches", force: :cascade do |t|
     t.bigint "home_member_id"
     t.bigint "away_member_id"
+    t.bigint "battle_id", null: false
     t.string "winner", default: ""
     t.string "loser", default: ""
     t.string "status", default: "playing"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["away_member_id"], name: "index_matches_on_away_member_id"
+    t.index ["battle_id"], name: "index_matches_on_battle_id"
     t.index ["home_member_id"], name: "index_matches_on_home_member_id"
   end
 
@@ -78,6 +80,7 @@ ActiveRecord::Schema.define(version: 2020_07_22_175717) do
 
   add_foreign_key "battles", "teams", column: "away_team_id"
   add_foreign_key "battles", "teams", column: "home_team_id"
+  add_foreign_key "matches", "battles"
   add_foreign_key "matches", "users", column: "away_member_id"
   add_foreign_key "matches", "users", column: "home_member_id"
   add_foreign_key "memberships", "teams"

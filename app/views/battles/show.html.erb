@@ -1,4 +1,8 @@
 <div class="container">
+  <%= link_to start_path(@battle) do %>
+    Start
+  <% end %>
+
   <%= @battle.home_team.name %> vs <%= @battle.away_team.name %>
   <table>
     <% @home_team_members.each_with_index do |member, index| %>
@@ -15,5 +19,17 @@
       </tr>
     <% end %>
   </table>
+
+  <%= @matches %>
+
+  <% if @matches.present? %>
+    <div class="matches">
+      <% @matches.each do |match| %>
+        <%= match.home_member.username %> vs <%= match.away_member.username %>
+        <br>
+      <% end %>
+    </div>
+  <% end %>
+
 </div>
 
