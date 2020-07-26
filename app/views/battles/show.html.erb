@@ -1,6 +1,10 @@
 <div class="container">
   <%= link_to start_path(@battle) do %>
-    Start
+    <% if @matches.present? %>
+      Reset
+    <% else %>
+      Start
+    <% end %>
   <% end %>
 
   <% if @matches.present? %>

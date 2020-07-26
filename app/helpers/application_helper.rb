@@ -5,6 +5,10 @@ module ApplicationHelper
 
   def status_tags(match, player)
     match_complete?(match) &&
-    player == match.winner ? "match-winner" : "match-loser"
+    player == match.winner ? "match-winner" : match_playing?(match)
+  end
+
+  def match_playing?(match)
+    match.status == "playing" ? "" :  "match-loser"
   end
 end
