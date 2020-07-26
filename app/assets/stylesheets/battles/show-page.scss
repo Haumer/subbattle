@@ -1,0 +1,22 @@
+.battle-match {
+  display: flex;
+  .home-team-player {
+    width: 45%;
+    text-align: right;
+  }
+  .away-team-player {
+    width: 45%;
+    text-align: left;
+  }
+  .versus {
+    width: 10%;
+    text-align: center;
+  }
+
+  .match-winner {
+    background-color: green;
+  }
+  .match-loser {
+    background-color: red;
+  }
+}

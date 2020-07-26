@@ -6,7 +6,8 @@ class BattlesController < ApplicationController
 
   def start
     if @home_team_members.count == @away_team_members.count
-      @matches = @home_team_members.map.with_index do |member, index|
+      @battle.matches.destroy_all
+      @home_team_members.map.with_index do |member, index|
         Match.create(
           home_member: member,
           away_member: @away_team_members[index],

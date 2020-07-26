@@ -3,7 +3,25 @@
     Start
   <% end %>
 
-  <%= @battle.home_team.name %> vs <%= @battle.away_team.name %>
+  <% if @matches.present? %>
+    <div class="matches">
+      <% @matches.each do |match| %>
+        <div class="battle-match">
+          <div class="home-team-player <%= status_tags(match, "home") %>">
+            <%= link_to "winner", declare_winner_path(id: match.id, winner: "home"), method: :post %>
+            <%= match.home_member.rating %> <%= match.home_member.username %>
+          </div>
+          <span class="versus">
+            vs
+          </span>
+          <div class="away-team-player <%= status_tags(match, "away") %>">
+            <%= match.away_member.username %> <%= match.away_member.rating %> <%= link_to "winner", declare_winner_path(id: match.id, winner: "away"), method: :post %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <%= @battle.home_team.name %> vs <%= @battle.away_team.name %>
   <table>
     <% @home_team_members.each_with_index do |member, index| %>
       <tr>
@@ -19,16 +37,6 @@
       </tr>
     <% end %>
   </table>
-
-  <%= @matches %>
-
-  <% if @matches.present? %>
-    <div class="matches">
-      <% @matches.each do |match| %>
-        <%= match.home_member.username %> vs <%= match.away_member.username %>
-        <br>
-      <% end %>
-    </div>
   <% end %>
 
 </div>

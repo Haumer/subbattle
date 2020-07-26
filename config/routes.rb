@@ -6,5 +6,6 @@ Rails.application.routes.draw do
 
   post "declare_home_winner", to: "matches#declare_home_winner"
   post "declare_away_winner", to: "matches#declare_away_winner"
+  post "declare_winner", to: "matches#declare_winner", as: "declare_winner"
   get "battles/:id/start", to: "battles#start", as: "start"
 end
