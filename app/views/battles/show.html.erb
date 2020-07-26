@@ -7,14 +7,14 @@
     <div class="matches">
       <% @matches.each do |match| %>
         <div class="battle-match">
-          <div class="home-team-player <%= status_tags(match, "home") %>">
+          <div class="home-team-player player-card <%= status_tags(match, "home") %>">
             <%= link_to "winner", declare_winner_path(id: match.id, winner: "home"), method: :post %>
             <%= match.home_member.rating %> <%= match.home_member.username %>
           </div>
           <span class="versus">
             vs
           </span>
-          <div class="away-team-player <%= status_tags(match, "away") %>">
+          <div class="away-team-player player-card <%= status_tags(match, "away") %>">
             <%= match.away_member.username %> <%= match.away_member.rating %> <%= link_to "winner", declare_winner_path(id: match.id, winner: "away"), method: :post %>
           </div>
         </div>

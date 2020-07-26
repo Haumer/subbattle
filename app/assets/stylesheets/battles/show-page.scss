@@ -14,9 +14,16 @@
   }
 
   .match-winner {
-    background-color: green;
+    background-color: rgb(84, 140, 47);
   }
   .match-loser {
-    background-color: red;
+    background-color: rgb(255, 27, 28);
   }
+}
+
+.player-card {
+  height: 32px;
+  padding: 4px 8px;
+  border-radius: 3px;
+  margin: 1px 0 ;
 }
