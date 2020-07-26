@@ -9,6 +9,6 @@ module ApplicationHelper
   end
 
   def match_playing?(match)
-    match.status == "playing" ? "" :  "match-loser"
+    match.status == "playing" ? "match-playing" :  "match-loser"
   end
 end

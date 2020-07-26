@@ -11,16 +11,29 @@
     <div class="matches">
       <% @matches.each do |match| %>
         <div class="battle-match">
-          <div class="home-team-player player-card <%= status_tags(match, "home") %>">
-            <%= link_to "winner", declare_winner_path(id: match.id, winner: "home"), method: :post %>
-            <%= match.home_member.rating %> <%= match.home_member.username %>
-          </div>
+          <%= link_to declare_winner_path(id: match.id, winner: "home"), method: :post, class: "home-team-player" do %>
+            <div class="player-card <%= status_tags(match, "home") %>">
+              <span class="player-username">
+                <%= match.home_member.username %>
+              </span>
+              <span class="player-rating">
+                <%= match.home_member.rating %>
+              </span>
+            </div>
+          <% end %>
           <span class="versus">
             vs
           </span>
-          <div class="away-team-player player-card <%= status_tags(match, "away") %>">
-            <%= match.away_member.username %> <%= match.away_member.rating %> <%= link_to "winner", declare_winner_path(id: match.id, winner: "away"), method: :post %>
-          </div>
+          <%= link_to declare_winner_path(id: match.id, winner: "away"), method: :post, class: "away-team-player" do %>
+            <div class="player-card <%= status_tags(match, "away") %>">
+              <span class="player-rating">
+                <%= match.away_member.rating %>
+              </span>
+              <span class="player-username">
+                <%= match.away_member.username %>
+              </span>
+            </div>
+          <% end %>
         </div>
       <% end %>
     </div>

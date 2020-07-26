@@ -26,7 +26,7 @@ class BattlesController < ApplicationController
 
   def set_battle
     @battle = Battle.find(params[:id])
-    @matches = @battle.matches
+    @matches = @battle.matches.order(created_at: :asc)
     @home_team_members = @battle.home_team.members.order(rating: :asc)
     @away_team_members = @battle.away_team.members.order(rating: :asc)
   end
