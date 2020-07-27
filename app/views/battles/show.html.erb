@@ -55,6 +55,16 @@
     <% end %>
   </table>
   <% end %>
-
+  <div class="battle-score">
+    <span class="home-score">
+      <%= @battle.matches.pluck(:winner).count("home") %>
+    </span>
+    <span class="divider">
+      :
+    </span>
+    <span class="away-score">
+      <%= @battle.matches.pluck(:winner).count("away") %>
+    </span>
+  </div>
 </div>
 
