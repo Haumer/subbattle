@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_22_175717) do
+ActiveRecord::Schema.define(version: 2020_08_02_121842) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 2020_07_22_175717) do
     t.string "status", default: "playing"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "result", default: [0, 0], array: true
     t.index ["away_member_id"], name: "index_matches_on_away_member_id"
     t.index ["battle_id"], name: "index_matches_on_battle_id"
     t.index ["home_member_id"], name: "index_matches_on_home_member_id"

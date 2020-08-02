@@ -1,30 +1,19 @@
 class MatchesController < ApplicationController
-
-  def declare_home_winner
-    @match = Match.find(params[:id])
-    @match.winner = "home"
-    @match.loser = "away"
-    @match.status = "complete"
-    @match.save!
-    redirect_to root_path
-  end
-
-  def declare_away_winner
-    @match = Match.find(params[:id])
-    @match.winner = "away"
-    @match.loser = "home"
-    @match.status = "complete"
-    @match.save!
-    redirect_to root_path
-  end
-
   def declare_winner
     @match = Match.find(params[:id])
-    @winner = params[:winner]
-    @match.winner = @winner
-    @match.loser = @winner == "home" ? "away" : "home"
-    @match.status = "complete"
-    @match.save!
+    @result = params[:winner]
+    if ["home", "away"].include?(@result)
+      @match.result = @result == "home" ? [1, 0] : [0, 1]
+      @match.winner = @result
+      @match.loser = @result == "home" ? "away" : "home"
+      @match.status = "complete"
+      @match.save!
+    elsif @result = "tie"
+      @match.result = [0.5, 0.5]
+      @match.winner = "tie"
+      @match.loser = "tie"
+      @match.save!
+    end
     redirect_back(fallback_location: root_path)
   end
 end
