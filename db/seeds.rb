@@ -22,6 +22,14 @@ gotham = User.create(email: "gotham@gmail.com", password: "123456")
 hikaru_team = Team.create(user: hikaru , name: "Hikaru")
 gotham_team = Team.create(user: gotham , name: "Gotham")
 
+[battle1, battle2, battle3].each do |battle|
+  battle.each do |k, v|
+    battle = Battle.create(home_team: hikaru_team, away_team: gotham_team)
+    home_player = User.find_or_create_by(v[:players].first)
+    away_player = User.find_or_create_by(v[:players].last)
+  end
+end
+
 battle1 = {"0"=>{:players=>["linuxarcher", "xxdustymcflyxx"], :result=>["1", "0"]},
  "1"=>{:players=>["Stoneworker427", "adamspa"], :result=>["1", "0"]},
  "2"=>{:players=>["hiwolf25", "proseqtor"], :result=>["1", "0"]},
