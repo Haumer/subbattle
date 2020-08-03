@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_02_121842) do
+ActiveRecord::Schema.define(version: 2020_08_02_225759) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,17 @@ ActiveRecord::Schema.define(version: 2020_08_02_121842) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["team_id"], name: "index_memberships_on_team_id"
     t.index ["user_id"], name: "index_memberships_on_user_id"
+  end
+
+  create_table "roster_members", force: :cascade do |t|
+    t.string "username"
+    t.integer "rating"
+    t.bigint "roster_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["roster_id"], name: "index_roster_members_on_roster_id"
+    t.index ["user_id"], name: "index_roster_members_on_user_id"
   end
 
   create_table "rosters", force: :cascade do |t|
@@ -86,6 +97,8 @@ ActiveRecord::Schema.define(version: 2020_08_02_121842) do
   add_foreign_key "matches", "users", column: "home_member_id"
   add_foreign_key "memberships", "teams"
   add_foreign_key "memberships", "users"
+  add_foreign_key "roster_members", "rosters"
+  add_foreign_key "roster_members", "users"
   add_foreign_key "rosters", "teams"
   add_foreign_key "teams", "users"
 end
