@@ -69,7 +69,11 @@
 
   <section>
     <div class="development">
-<%= raise %>
+      <% @battle.matches.each_with_index do |_match, index| %>
+        Home score: <%= @battle.score_up_to_now(index + 1)[:home] %>
+        Away score: <%= @battle.score_up_to_now(index + 1)[:away] %>
+        <br>
+      <% end %>
     </div>
   </section>
 </div>

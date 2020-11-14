@@ -8,8 +8,9 @@ class Battle < ApplicationRecord
 
     difference = Hash.new(0)
     matches.all.first(nr_of_matches_played).each do |match|
-      difference[:home] += match.result.first
-      difference[:away] += match.result.last
+
+      difference[:home] += match.result.first.zero? ? -1 : match.result.first
+      difference[:away] += match.result.last.zero? ? -1 : match.result.last
     end
     difference
   end
